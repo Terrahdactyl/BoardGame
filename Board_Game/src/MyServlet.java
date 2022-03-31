@@ -23,8 +23,8 @@ public class MyServlet extends HttpServlet {
       response.setContentType("text/html");
 
       // #1
-      UtilDB.createGames("user3", "33", "402-111-1111");
-      UtilDB.createGames("user4", "44", "402-222-2222");
+      UtilDB.createGames("user3", "33", "1111", "10");
+      UtilDB.createGames("user4", "44", "2222", "10");
       
       // #2
       retrieveDisplayData(response.getWriter());
@@ -44,13 +44,15 @@ public class MyServlet extends HttpServlet {
       for (Game game : listGames) {
          System.out.println("[DBG] " + game.getId() + ", " //
                + game.getName() + ", " //
-               + game.getType()
-               + game.getPlayers());
+               + game.getType() + ", "
+               + game.getMinPlayers() + ", "
+               + game.getMaxPlayers());
 
          out.println("<li>" + game.getId() + ", " //
                + game.getName() + ", " //
                + game.getType() + ", " //
-               + game.getPlayers() + "</li>");
+               + game.getMinPlayers() + ", "
+               + game.getMaxPlayers() + "</li>");
       }
       out.println("</ul>");
       out.println("</body></html>");
