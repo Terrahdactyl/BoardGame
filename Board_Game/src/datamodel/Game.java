@@ -29,23 +29,27 @@ public class Game {
    @Column(name = "type")
    private String type;
    
-   @Column(name = "players")
-   private Integer players;
+   @Column(name = "minplayers")
+   private Integer minplayers;
+   
+   @Column(name = "maxplayers")
+   private Integer maxplayers;   
 
    public Game() {
    }
 
-   public Game(Integer id, String name, String type, Integer players) {
-      this.id = id;
-      this.name = name;
-      this.type = type;
-      this.players = players;
-   }
+//   public Game(Integer id, String name, String type, Integer players) {
+//      this.id = id;
+//      this.name = name;
+//      this.type = type;
+//      this.players = players;
+//   }
 
-   public Game(String name, String type, Integer players) {
+   public Game(String name, String type, Integer minplayers, Integer maxplayers) {
       this.name = name;
       this.type = type;
-      this.players = players;
+      this.minplayers = minplayers;
+      this.maxplayers = maxplayers;
    }
 
    public Integer getId() {
@@ -72,16 +76,24 @@ public class Game {
       this.type = type;
    }
    
-   public Integer getPlayers() {
-	  return players;
+   public Integer getMinPlayers() {
+	  return this.minplayers;
    }
 
-   public void setPlayers(Integer players) {
-	  this.players = players;
+   public Integer getMaxPlayers() {
+	  return this.maxplayers;
+   }
+   
+   public void setMinPlayers(Integer players) {
+	  this.minplayers = players;
+   }
+   
+   public void setMaxPlayers(Integer players) {
+	  this.maxplayers = players;
    }
 
    @Override
    public String toString() {
-      return "Board Game: " + this.id + ", " + this.name + ", " + this.type + ", " + this.players;
+      return "Board Game: " + this.id + ", " + this.name + ", " + this.type + ", " + this.minplayers + ", " + this.maxplayers;
    }
 }
