@@ -50,13 +50,15 @@ public class SearchGame extends HttpServlet implements Info {
       for (Game game : listGames) {
          System.out.println("[DBG] " + game.getId() + ", " //
                + game.getName() + ", " //
-               + game.getType()
-               + game.getPlayers());
+               + game.getType() + ", "
+               + game.getMinPlayers() + ", "
+               + game.getMaxPlayers());
 
          out.println("<li>" + game.getId() + ", " //
                + game.getName() + ", " //
                + game.getType() + ", " //
-               + game.getPlayers() + "</li>");
+               + game.getMinPlayers() + ", "
+               + game.getMaxPlayers() + "</li>");
       }
    }
 
