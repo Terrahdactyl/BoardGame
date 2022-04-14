@@ -72,7 +72,7 @@ public class UtilDB {
          List<?> games = session.createQuery("FROM Game").list();
          for (Iterator<?> iterator = games.iterator(); iterator.hasNext();) {
             Game game = (Game) iterator.next();
-            if (game.getName().toLowerCase().startsWith(keyword.toLowerCase())) {
+            if (game.getName().toLowerCase().contains(keyword.toLowerCase())) {
                resultList.add(game);
             }
          }

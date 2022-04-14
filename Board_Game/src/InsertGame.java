@@ -36,9 +36,10 @@ public class InsertGame extends HttpServlet implements Info {
             "<body bgcolor=\"#f0f0f0\">\n" + //
             "<h1 align=\"center\">" + title + "</h1>\n");
       out.println("<ul>");
-      out.println("<li> Team Name: " + name);
+      out.println("<li> Game Name: " + name);
       out.println("<li> Team Owner: " + type);
-      out.println("<li> Number of Wins: " + minplayers);
+      out.println("<li> Minimum number of Players: " + minplayers);
+      out.println("<li> Maximum number of Players: " + maxplayers);
       out.println("</ul>");
       out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Data</a> <br>");
       out.println("</body></html>");

@@ -37,12 +37,14 @@ public class SearchGame extends HttpServlet implements Info {
       List<Game> listGames = null;
       if (keyword != null && !keyword.isEmpty()) {
          listGames = UtilDB.listGames(keyword);
-      } else {
+      } 
+      else {
          listGames = UtilDB.listGames();
       }
       display(listGames, out);
       out.println("</ul>");
-      out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Data</a> <br>");
+      out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Again</a> <br>");
+      out.println("<a href=/" + projectName + "/home.html>Return to Home Page</a> <br>");
       out.println("</body></html>");
    }
 
