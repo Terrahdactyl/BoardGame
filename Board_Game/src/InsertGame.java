@@ -20,10 +20,11 @@ public class InsertGame extends HttpServlet implements Info {
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       String name = request.getParameter("name").trim();
+      String description = request.getParameter("description").trim();
       String type = request.getParameter("type").trim();
       String minplayers = request.getParameter("minplayers").trim();
       String maxplayers = request.getParameter("maxplayers").trim();
-      UtilDB.createGames(name, type, minplayers, maxplayers);
+      UtilDB.createGames(name, description, type, minplayers, maxplayers);
 
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();

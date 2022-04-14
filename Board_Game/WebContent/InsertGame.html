@@ -2,26 +2,19 @@
 <head>
 <style>
 header {
-    background-color:black;
+    background-color:grey;
     color:white;
     text-align:center;
     padding:5px;	 
 }
-nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
-    padding:5px;	      
-}
+
 section {
     width:350px;
     float:left;
     padding:10px;	 	 
 }
 footer {
-    background-color:black;
+    background-color:grey;
     color:white;
     clear:both;
     text-align:center;
@@ -32,29 +25,37 @@ footer {
 
 <body>
 <header>
-<h1>The Board Game</h1>
+<h1>Add a New Game</h1>
 </header>
 
-<nav>
-<a href="/Board_Game/SearchGame.html">Search for a Game</a> <br>
-</nav>
 
 <section>
-	<h1>Game Input</h1>
+	<h1>Game Info</h1>
 	
 	<form action="InsertGame" method="POST">
 	
-		Game Name: <input type="text" name="name"> <br />
-		Game Type: <input type="text" name="type"> <br />
-		Game Players: <input type="text" name="players"> <br />
+		Name: <input type="text" name="name"> <br />
+		Description: <textarea rows = "3" cols = "40" name = "description"></textarea> <br />
+        Type: <input list="types" name="type">
+                <datalist id="types">
+                <option value="Action">
+                <option value="Adventure">
+                <option value="Dice">
+                <option value="Family">
+                <option value="Funny">
+                <option value="Mystery">
+                <option value="Other">
+            </datalist> <br />
+		Minimum Players: <input type="number" name="minPlayers" min="0" max="99"> <br />
+		Maximum Players: <input type="number" name="maxPlayers" min="0" max="99"> <br />
 		
 		<input type="submit" value="Submit" />
 	</form>
-
+    <br><a href="/Board_Game/SearchGame.html">Return to Homepage</a>
 </section>
 
 <footer>
-Copyright
+Copyright - BoardGame - 2022
 </footer>
 </body>
 </html>

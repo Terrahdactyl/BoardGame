@@ -6,25 +6,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * @since J2SE-1.8
- CREATE TABLE employee (
-  id INT NOT NULL AUTO_INCREMENT,    
-  name VARCHAR(30) NOT NULL,   
-  age INT NOT NULL,    
-  PRIMARY KEY (id));
- */
 @Entity
 @Table(name = "games")
 public class Game {
 
    @Id  // primary key
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "id") // specify the column name. Without it, it will use method name
+   @Column(name = "id")
    private Integer id;
 
    @Column(name = "name")
    private String name;
+
+   @Column(name = "description")
+   private String description;
 
    @Column(name = "type")
    private String type;
@@ -38,15 +33,9 @@ public class Game {
    public Game() {
    }
 
-//   public Game(Integer id, String name, String type, Integer players) {
-//      this.id = id;
-//      this.name = name;
-//      this.type = type;
-//      this.players = players;
-//   }
-
-   public Game(String name, String type, Integer minplayers, Integer maxplayers) {
+   public Game(String name, String description, String type, Integer minplayers, Integer maxplayers) {
       this.name = name;
+      this.description = description;
       this.type = type;
       this.minplayers = minplayers;
       this.maxplayers = maxplayers;
@@ -68,6 +57,14 @@ public class Game {
       this.name = name;
    }
 
+   public String getDescription() {
+	      return description;
+	   }
+
+   public void setDescription(String description) {
+      this.description = description;
+   }
+   
    public String getType() {
       return type;
    }
@@ -94,6 +91,6 @@ public class Game {
 
    @Override
    public String toString() {
-      return "Board Game: " + this.id + ", " + this.name + ", " + this.type + ", " + this.minplayers + ", " + this.maxplayers;
+      return "Board Game: " + this.id + ", " + this.name + ", " + this.description + ", " + this.type + ", " + this.minplayers + ", " + this.maxplayers;
    }
 }

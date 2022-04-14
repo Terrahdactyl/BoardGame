@@ -87,12 +87,12 @@ public class UtilDB {
       return resultList;
    }
 
-   public static void createGames(String name, String type, String minplayers, String maxplayers) {
+   public static void createGames(String name, String description, String type, String minplayers, String maxplayers) {
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
-         session.save(new Game(name, type, Integer.valueOf(minplayers), Integer.valueOf(maxplayers)));
+         session.save(new Game(name, description, type, Integer.valueOf(minplayers), Integer.valueOf(maxplayers)));
          tx.commit();
       } catch (HibernateException e) {
          if (tx != null)

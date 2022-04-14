@@ -23,8 +23,8 @@ public class MyServlet extends HttpServlet {
       response.setContentType("text/html");
 
       // #1
-      UtilDB.createGames("user3", "33", "1111", "10");
-      UtilDB.createGames("user4", "44", "2222", "10");
+      UtilDB.createGames("user3", "1234", "33", "1111", "10");
+      UtilDB.createGames("user4", "5678", "44", "2222", "10");
       
       // #2
       retrieveDisplayData(response.getWriter());
