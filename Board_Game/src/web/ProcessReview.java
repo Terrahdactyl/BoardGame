@@ -69,7 +69,7 @@ public class ProcessReview extends HttpServlet {
 				"      <form action=\"ViewGame\" method=\"POST\">\r\n" + 
 				"        <input type=\"submit\" value=\"Return to " + attributes[1] + "\" name=\"" + gameParams + "\">\r\n" + 
 				"      </form>\r\n" + 
-				"      <a href=\"/Board_Game/SearchGame.html\">Return to Homepage</a>\r\n" + 
+				"      <a href=\"/Board_Game/Homepage\">Return to Homepage</a>\r\n" + 
 				"    </section>\r\n" + 
 				"    <footer> Copyright - BoardGame - 2022 </footer>\r\n" + 
 				"  </body>\r\n" + 
