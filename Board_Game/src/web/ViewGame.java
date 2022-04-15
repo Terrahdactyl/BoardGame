@@ -36,9 +36,9 @@ public class ViewGame extends HttpServlet {
 	void retrieveDisplayData(PrintWriter out, String[] attributes, String paramNames) {
 		
 		 List<Feedback> listFeedback = UtilDB.listFeedback();
-		 int totalRating = 5;
+		 double totalRating = 5;
 		 double avgRating = 0;
-		 int count = 1;
+		 double count = 1;
 		 String feedbackTable = "";
 		 
 		 for (Feedback feedback : listFeedback) {
@@ -94,7 +94,7 @@ public class ViewGame extends HttpServlet {
 				"  <body>\r\n" + 
 				"    <header>\r\n" + 
 				"      <h1>" + attributes[1] + "</h1>\r\n" + 
-				"      <h3>Type: " + attributes[3] + " &emsp; [Rating " + avgRating + "/5.0] &emsp; Players " + attributes[4] + "-" + attributes[5] + "</h3>" + 
+				"      <h3>Type: " + attributes[3] + " &emsp; Rating " + avgRating + "/5.0 &emsp; Players " + attributes[4] + "-" + attributes[5] + "</h3>" + 
 				"    </header>\r\n" + 
 				"    <section>" + attributes[2] + "<br>\r\n" + 
 				"      <br>\r\n" + 
