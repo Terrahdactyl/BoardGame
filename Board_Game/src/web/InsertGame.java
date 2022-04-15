@@ -20,30 +20,15 @@ public class InsertGame extends HttpServlet implements Info {
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String name = request.getParameter("name").trim();
-      String description = request.getParameter("description").trim();
-      String type = request.getParameter("type").trim();
-      String minplayers = request.getParameter("minplayers").trim();
-      String maxplayers = request.getParameter("maxplayers").trim();
+     
+	  String name = request.getParameter("name").trim();
+	  String description = request.getParameter("description").trim();
+	  String type = request.getParameter("type").trim();
+	  String minplayers = request.getParameter("minplayers").trim();
+	  String maxplayers = request.getParameter("maxplayers").trim();
+	   
       UtilDB.createGames(name, description, type, minplayers, maxplayers);
-
-      response.setContentType("text/html");
-      PrintWriter out = response.getWriter();
-      String title = "Database Result";
-      String docType = "<!doctype html public \"-//w3c//dtd html 4.0 transitional//en\">\n"; //
-      out.println(docType + //
-            "<html>\n" + //
-            "<head><title>" + title + "</title></head>\n" + //
-            "<body bgcolor=\"#f0f0f0\">\n" + //
-            "<h1 align=\"center\">" + title + "</h1>\n");
-      out.println("<ul>");
-      out.println("<li> Game Name: " + name);
-      out.println("<li> Team Owner: " + type);
-      out.println("<li> Minimum number of Players: " + minplayers);
-      out.println("<li> Maximum number of Players: " + maxplayers);
-      out.println("</ul>");
-      out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Data</a> <br>");
-      out.println("</body></html>");
+      response.sendRedirect("/Board_Game/Homepage");
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -12,6 +12,7 @@ import org.hibernate.cfg.Configuration;
 //import org.hibernate.service.ServiceRegistry;
 //import org.hibernate.service.ServiceRegistryBuilder;
 
+import datamodel.Feedback;
 import datamodel.Game;
 
 import org.hibernate.HibernateException;
@@ -34,12 +35,52 @@ public class UtilDB {
       sessionFactory = configuration.buildSessionFactory(builder.build());
       return sessionFactory;
    }
+   
+   public static List<Feedback> listFeedback() {
+	      List<Feedback> resultList = new ArrayList<Feedback>();
+
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+
+	      try {
+	         tx = session.beginTransaction();
+	         List<?> teams = session.createQuery("FROM Feedback").list();
+	         for (Iterator<?> iterator = teams.iterator(); iterator.hasNext();) {
+	        	 Feedback feedback = (Feedback) iterator.next();
+	            resultList.add(feedback);
+	         }
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	      return resultList;
+	   }
+   
+   public static void createFeedback(String gameName, String rating, String review) {
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+	      try {
+	         tx = session.beginTransaction();
+	         session.save(new Feedback(gameName, Integer.valueOf(rating), review));
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	   }
 
    public static List<Game> listGames() {
       List<Game> resultList = new ArrayList<Game>();
 
       Session session = getSessionFactory().openSession();
-      Transaction tx = null;  // each process needs transaction and commit the changes in DB.
+      Transaction tx = null;
 
       try {
          tx = session.beginTransaction();
@@ -59,6 +100,23 @@ public class UtilDB {
       return resultList;
    }
 
+   public static void createGames(String name, String description, String type, String minplayers, String maxplayers) {
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+	      try {
+	         tx = session.beginTransaction();
+	         session.save(new Game(name, description, type, Integer.valueOf(minplayers), Integer.valueOf(maxplayers)));
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	   }
+   
+   // Unused
    public static List<Game> listGames(String keyword) {
       List<Game> resultList = new ArrayList<Game>();
 
@@ -67,8 +125,7 @@ public class UtilDB {
 
       try {
          tx = session.beginTransaction();
-         System.out.println((Game)session.get(Game.class, 1)); // use "get" to fetch data
-        // Query q = session.createQuery("FROM Game");
+         System.out.println((Game)session.get(Game.class, 1));
          List<?> games = session.createQuery("FROM Game").list();
          for (Iterator<?> iterator = games.iterator(); iterator.hasNext();) {
             Game game = (Game) iterator.next();
@@ -85,21 +142,5 @@ public class UtilDB {
          session.close();
       }
       return resultList;
-   }
-
-   public static void createGames(String name, String description, String type, String minplayers, String maxplayers) {
-      Session session = getSessionFactory().openSession();
-      Transaction tx = null;
-      try {
-         tx = session.beginTransaction();
-         session.save(new Game(name, description, type, Integer.valueOf(minplayers), Integer.valueOf(maxplayers)));
-         tx.commit();
-      } catch (HibernateException e) {
-         if (tx != null)
-            tx.rollback();
-         e.printStackTrace();
-      } finally {
-         session.close();
-      }
    }
 }

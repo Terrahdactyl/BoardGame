@@ -4,17 +4,19 @@
 
 <hibernate-configuration>
 	<session-factory>
-	    <!-- The dialect specifies the type of database used in hibernate so that hibernate generate appropriate type of SQL statements. -->
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<!-- The dialect specifies the type of database used in hibernate so that 
+			hibernate generate appropriate type of SQL statements. -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://ec2-18-212-51-30.compute-1.amazonaws.com:3306/myDB?enabledTLSProtocols=TLSv1.2</property>
-		<property name="hibernate.connection.username">tquinlan_remote</property>
-		<property name="hibernate.connection.password">dbTHINGSand5tu44</property>
-		<!-- you can create and update the table if it is not in DB. If create, it create new table everytime-->
+		<property name="hibernate.connection.url">jdbc:mysql://ec2-54-164-163-124.compute-1.amazonaws.com:3306/YOUR_DATABASE</property>
+		<property name="hibernate.connection.username">USERNAME</property>
+		<property name="hibernate.connection.password">PASSWORD</property>
+		<!-- you can create and update the table if it is not in DB. If create, 
+			it create new table everytime -->
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- True you will see sql in console -->
 		<property name="show_sql">true</property>
-		<!-- Should the below line be commented out? -->
 		<mapping class="datamodel.Game" />
+		<mapping class="datamodel.Feedback" />
 	</session-factory>
 </hibernate-configuration>

@@ -17,18 +17,18 @@ public class Feedback {
 	private Integer id;
 
 	@Column(name = "gameName")
-	private Integer gameName;
+	private String gameName;
 
 	@Column(name = "rating")
 	private Integer rating;
 
-	@Column(name = "review")
+	@Column(name = "review", length = 1000)
 	private String review;
 
 	public Feedback() {
 	}
 
-	public Feedback(Integer gameName, Integer rating, String review) {
+	public Feedback(String gameName, Integer rating, String review) {
 		super();
 		this.gameName = gameName;
 		this.rating = rating;
@@ -43,11 +43,11 @@ public class Feedback {
 		this.id = id;
 	}
 
-	public Integer getGameName() {
+	public String getGameName() {
 		return gameName;
 	}
 
-	public void setGameName(Integer gameName) {
+	public void setGameName(String gameName) {
 		this.gameName = gameName;
 	}
 
