@@ -1,6 +1,6 @@
+package web;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datamodel.Game;
 import util.Info;
 import util.UtilDB;
 
-@WebServlet("/SearchGame")
-public class SearchGame extends HttpServlet implements Info {
+@WebServlet("/InsertGame")
+public class InsertGame extends HttpServlet implements Info {
    private static final long serialVersionUID = 1L;
 
-   public SearchGame() {
+   public InsertGame() {
       super();
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String keyword = request.getParameter("keyword").trim();
+      String name = request.getParameter("name").trim();
+      String description = request.getParameter("description").trim();
+      String type = request.getParameter("type").trim();
+      String minplayers = request.getParameter("minplayers").trim();
+      String maxplayers = request.getParameter("maxplayers").trim();
+      UtilDB.createGames(name, description, type, minplayers, maxplayers);
 
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
@@ -33,35 +37,13 @@ public class SearchGame extends HttpServlet implements Info {
             "<body bgcolor=\"#f0f0f0\">\n" + //
             "<h1 align=\"center\">" + title + "</h1>\n");
       out.println("<ul>");
-
-      List<Game> listGames = null;
-      if (keyword != null && !keyword.isEmpty()) {
-         listGames = UtilDB.listGames(keyword);
-      } 
-      else {
-         listGames = UtilDB.listGames();
-      }
-      display(listGames, out);
+      out.println("<li> Game Name: " + name);
+      out.println("<li> Team Owner: " + type);
+      out.println("<li> Minimum number of Players: " + minplayers);
+      out.println("<li> Maximum number of Players: " + maxplayers);
       out.println("</ul>");
-      out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Again</a> <br>");
-      out.println("<a href=/" + projectName + "/home.html>Return to Home Page</a> <br>");
+      out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Data</a> <br>");
       out.println("</body></html>");
-   }
-
-   void display(List<Game> listGames, PrintWriter out) {
-      for (Game game : listGames) {
-         System.out.println("[DBG] " + game.getId() + ", " //
-               + game.getName() + ", " //
-               + game.getType() + ", "
-               + game.getMinPlayers() + ", "
-               + game.getMaxPlayers());
-
-         out.println("<li>" + game.getId() + ", " //
-               + game.getName() + ", " //
-               + game.getType() + ", " //
-               + game.getMinPlayers() + ", "
-               + game.getMaxPlayers() + "</li>");
-      }
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

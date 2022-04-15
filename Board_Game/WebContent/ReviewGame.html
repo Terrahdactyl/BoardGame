@@ -1,0 +1,48 @@
+<html>
+<head>
+<style>
+header {
+    background-color:grey;
+    color:white;
+    text-align:center;
+    padding:5px;	 
+}
+
+section {
+    width:350px;
+    float:left;
+    padding:10px;	 	 
+}
+footer {
+    background-color:grey;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;	 	 
+}
+</style>
+</head>
+
+<body>
+<header>
+<h1>Leave a Review</h1>
+</header>
+
+
+<section>
+	
+	<form action="InsertGame" method="POST">
+	
+		Rating: <input type="number" min="0" max="5" name="rating"> <br />
+		Review: <textarea rows = "3" cols = "40" name = "description"></textarea> <br />
+		
+		<input type="submit" value="Submit" />
+	</form>
+    <br><a href="/Board_Game/SearchGame.html">Return to Homepage</a>
+</section>
+
+<footer>
+Copyright - BoardGame - 2022
+</footer>
+</body>
+</html>
