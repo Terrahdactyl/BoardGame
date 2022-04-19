@@ -2,60 +2,119 @@
 <head>
 <style>
 header {
-    background-color:grey;
-    color:white;
-    text-align:center;
-    padding:5px;	 
+	background-color: #6495ED;
+	color: white;
+	text-align: center;
+	padding: 5px;
+	font-size: 25px;
 }
 
 section {
-    width:350px;
-    float:left;
-    padding:10px;	 	 
+	font-size: 20px;
+	width: 300px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
+
 footer {
-    background-color:grey;
-    color:white;
-    clear:both;
-    text-align:center;
-    padding:5px;	 	 
+	background-color: #6495ED;
+	color: white;
+	clear: both;
+	text-align: center;
+	padding: 5px;
+}
+
+span {
+	color: white;
+	background-color: #7B68EE;
+	font-style: italic;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#container div {
+	display: inline-block;
+	padding: 5px;
+}
+
+.button {
+	background-color: #483D8B;
+	border-radius: 20px;
+	border-style: none;
+	box-sizing: border-box;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 16px;
+	height: 40px;
+	line-height: 10px;
+	list-style: none;
+	margin: 0;
+	outline: none;
+	padding: 10px 16px;
+	position: relative;
+	text-align: center;
+}
+
+.subbutton {
+	background-color: #FF6347;
+	border-radius: 10px;
+	border-style: none;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 16px;
+	height: 40px;
+	line-height: 10px;
+	list-style: none;
+	margin: 0;
+	outline: none;
+	padding: 10px 16px;
+	position: relative;
+	text-align: center;
 }
 </style>
 </head>
-
 <body>
-<header>
-<h1>Add a New Game</h1>
-</header>
+	<header>
+		<h1>The Game Board</h1>
+	</header>
+	<div id="container">
+		<center>
+			<div>
+				<a href="/Board_Game/Homepage"><button class="button">Home</button></a>
+			</div>
+		</center>
+	</div>
+	<br>
+	<center>
+		<span>Add a New Game</span>
+	</center>
+	<br>
+	<section>
+		<form action="InsertGame" method="POST">
+			Name: <input type="text" name="name"> <br> Description:
+			<textarea rows="3" cols="40" name="description"></textarea>
+			<br> Type: <input list="types" name="type">
+			<datalist id="types">
+				<option value="Action">
+				<option value="Adventure">
+				<option value="Dice">
+				<option value="Family">
+				<option value="Funny">
+				<option value="Mystery">
+				<option value="Other">
+			</datalist>
+			<br> Minimum Players: <input type="number" name="minplayers"
+				min="0" max="99"> <br> Maximum Players: <input
+				type="number" name="maxplayers" min="0" max="99"> <br>
+			<br>
+			<center>
+				<input class="subbutton" type="submit" value="Submit" />
+			</center>
+		</form>
+	</section>
+	<br>
 
-
-<section>
-	<h1>Game Info</h1>
-	
-	<form action="InsertGame" method="POST">
-	
-		Name: <input type="text" name="name"> <br />
-		Description: <textarea rows = "3" cols = "40" name = "description"></textarea> <br />
-        Type: <input list="types" name="type">
-                <datalist id="types">
-                <option value="Action">
-                <option value="Adventure">
-                <option value="Dice">
-                <option value="Family">
-                <option value="Funny">
-                <option value="Mystery">
-                <option value="Other">
-            </datalist> <br />
-		Minimum Players: <input type="number" name="minplayers" min="1" max="99"> <br />
-		Maximum Players: <input type="number" name="maxplayers" min="1" max="99"> <br />
-		
-		<input type="submit" value="Submit" />
-	</form>
-    <br><a href="/Board_Game/Homepage">Return to Homepage</a>
-</section>
-
-<footer>
-Copyright - BoardGame - 2022
-</footer>
+	<footer> Copyright - BoardGame - 2022 </footer>
 </body>
 </html>
