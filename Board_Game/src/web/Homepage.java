@@ -127,7 +127,7 @@ public class Homepage extends HttpServlet {
 		   		"          </a>\r\n" + 
 		   		"        </div>\r\n" + 
 		   		"      </center>\r\n" + 
-		   		"      <p class=\"intro\">Greetings die rollers, car throwers, and game lovers! We are the Game Board! The Game Board is a tool for fans of board games to wield in their playing. Look up the rule, discover new games, and even more abilities await you1 Rate the games you've played, or leave a glowing (or scathing) review on those games for others to see! All of this more, here at the Game Board. Game on.</p>\r\n" + 
+		   		"      <p class=\"intro\">Greetings die rollers, card throwers, and game lovers! We are the Game Board! The Game Board is a new tool for board game fans to wield. Look up the rule, discover new games, and even more abilities await you1 Rate the games you've played, or leave a glowing (or scathing) review on those games for others to see! All of this more, here at the Game Board. Game on.</p>\r\n" + 
 		   		"    </div>\r\n" + 
 		   		"    <center>\r\n" + 
 		   		"      <form action=\"ViewGame\" method=\"POST\">\r\n" + 
