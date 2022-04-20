@@ -162,10 +162,10 @@ public class ViewGame extends HttpServlet {
 				"    </center>\r\n" + 
 				"    <br>\r\n" + 
 				"    <section>\r\n" + 
-				"      <h3>Rating: " + avgRating + "/10</h3>\r\n" + 
+				"      <h3>Rating: " + avgRating + "/10.0</h3>\r\n" + 
 				"      <p>Type: " + attributes[3] + "</p>\r\n" + 
 				"      <p>Players: " + attributes[4] + "-" + attributes[5] + "</p>\r\n" + 
-				"      <p>Intruction: </p>"+ attributes[2] +"<br>\r\n" + 
+				"      <p>Instruction: </p>"+ attributes[2] +"<br>\r\n" + 
 				"      <br>\r\n" + 
 				"      <br>\r\n" + 
 				"    </section>\r\n" + 
