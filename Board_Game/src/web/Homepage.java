@@ -39,7 +39,7 @@ public class Homepage extends HttpServlet {
 			 // Build Table
 			 gameTable += "<tr>"
 			 		+ "<td>"
-			 		+ "<input class=\"gamebutton\" type=\"submit\" value=\"" + game.getName() + "\" name=\"" + game.toString() + "\"/>"
+			 		+ "<input class=\"gamebutton\" type=\"submit\" value=\"" + game.getName() + "\" name=\"name\"/>"
 			 		+ "</td>"
 			 		+ "</tr>";
 		 }
@@ -90,7 +90,7 @@ public class Homepage extends HttpServlet {
 		   		"\r\n" + 
 		   		"      #container div {\r\n" + 
 		   		"        display: inline-block;\r\n" + 
-		   		"        padding: 5px;\r\n" + 
+		   		"        padding: 2px;\r\n" + 
 		   		"      }\r\n" + 
 		   		"\r\n" + 
 		   		"      .intro {\r\n" + 
@@ -113,6 +113,13 @@ public class Homepage extends HttpServlet {
 		   		"        border: 0;\r\n" + 
 		   		"        font-size: 24px;\r\n" + 
 		   		"      }\r\n" + 
+		   		"		::placeholder {\r\n" + 
+		   		"  			color: White;\r\n" + 
+		   		"  			opacity: 1;\r\n" + 
+		   		"		}\r\n" + 
+		   		"		input:focus::placeholder {\r\n" + 
+		   		"  			color: transparent;\r\n" + 
+		   		"		}" +
 		   		"    </style>\r\n" + 
 		   		"  </head>\r\n" + 
 		   		"  <body>\r\n" + 
@@ -121,11 +128,14 @@ public class Homepage extends HttpServlet {
 		   		"    </header>\r\n" + 
 		   		"    <div id=\"container\">\r\n" + 
 		   		"      <center>\r\n" + 
+		   		"		<form action=\"SearchGame\" method=\"POST\">" +
 		   		"        <div>\r\n" + 
-		   		"          <a href=\"/Board_Game/InsertGame.html\">\r\n" + 
-		   		"            <button class=\"button\">Add a New Game</button>\r\n" + 
-		   		"          </a>\r\n" + 
+		   		"          <a href=\"/Board_Game/InsertGame.html\" class=\"button\" style=\"text-decoration:none;\">Add a New Game</a>" + 
 		   		"        </div>\r\n" + 
+		   		"        <div>\r\n" + 
+		   		"          <input class =\"button\" type=\"text\" name=\"name\" placeholder=\"Search for a Game\">" + 
+		   		"        </div>\r\n" + 
+		   		"		</form>" +
 		   		"      </center>\r\n" + 
 		   		"      <p class=\"intro\">Greetings die rollers, card throwers, and game lovers! We are the Game Board! The Game Board is a new tool for board game fans to wield. Look up the rule, discover new games, and even more abilities await you1 Rate the games you've played, or leave a glowing (or scathing) review on those games for others to see! All of this more, here at the Game Board. Game on.</p>\r\n" + 
 		   		"    </div>\r\n" + 

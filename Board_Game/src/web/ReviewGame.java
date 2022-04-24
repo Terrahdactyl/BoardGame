@@ -23,16 +23,16 @@ public class ReviewGame extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+			String gameName = request.getParameter("name").trim();
+			gameName = UtilDB.formatInfo(gameName);
 			response.setContentType("text/html");
 		    PrintWriter out = response.getWriter();
-		    String gameParams = request.getParameterNames().nextElement();
-		    String[] attributes = gameParams.split("\\|");
 		    
-			retrieveDisplayData(out, attributes, gameParams);
+			retrieveDisplayData(out, gameName);
 			
 	}
 	
-void retrieveDisplayData(PrintWriter out, String[] attributes, String gameParams) {
+void retrieveDisplayData(PrintWriter out, String gameName) {
 		
 		out.print("<html>\r\n" + 
 				"<head>\r\n" + 
@@ -117,14 +117,13 @@ void retrieveDisplayData(PrintWriter out, String[] attributes, String gameParams
 				"    </center>\r\n" + 
 				"</div>\r\n" + 
 				"<br>\r\n" + 
-				"<center><span>Leave a Review for " + attributes[1] + "</span></center>\r\n" + 
+				"<center><span>Leave a Review for " + gameName + "</span></center>\r\n" + 
 				"<br>\r\n" + 
 				"<section>\r\n" + 
 				"<form action=\"ProcessReview\" method=\"POST\">\r\n" + 
-				"<input type=\"hidden\" name=\"" + gameParams + "\"/>" +
 				"Rating: <input type=\"number\" min=\"0\" max=\"10\" name=\"rating\"> <br> <br>\r\n" + 
 				"Review: <textarea rows=\"3\" cols=\"40\" name=\"review\"></textarea> <br> <br>\r\n" + 
-				"<center><input class=\"subbutton\" type=\"submit\" value=\"Submit\" /></center>\r\n" + 
+				"<center><button class=\"subbutton\" type=\"submit\" name=\"name\" value=\"" + gameName + "\" />Submit</button></center>\r\n" + 
 				"</form>\r\n" + 
 				"<br>\r\n" + 
 				"</section>\r\n" + 

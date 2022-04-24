@@ -24,18 +24,34 @@ public class ViewGame extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String gameName = request.getParameter("name").trim();
+		gameName = UtilDB.formatInfo(gameName);
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
-	    String paramNames = request.getParameterNames().nextElement();
-		String[] attributes = paramNames.split("\\|");
-		
-		retrieveDisplayData(out, attributes, paramNames);
+		retrieveDisplayData(out, gameName, response);
 	
 	}
 
-	void retrieveDisplayData(PrintWriter out, String[] attributes, String paramNames) {
+	void retrieveDisplayData(PrintWriter out, String gameName, HttpServletResponse response) {
 		
 		 List<Feedback> listFeedback = UtilDB.listFeedback();
+		 Game game = new Game();
+		 
+		 // Catch potential out-of-bounds error due to empty game list being returned, just go back to homepage
+		 try {
+		 game = UtilDB.listGames(UtilDB.formatInfo(gameName)).get(0);
+		 }
+		 catch (java.lang.IndexOutOfBoundsException e) 
+		 {
+			 try {
+				response.sendRedirect("/Board_Game/Homepage");
+			} catch (IOException e1) {
+				System.out.println("Couldn't find game");
+				e1.printStackTrace();
+			}
+		 }
+		 
+		 
 		 double totalRating = 10;
 		 double avgRating = 0;
 		 double count = 1;
@@ -43,11 +59,11 @@ public class ViewGame extends HttpServlet {
 		 
 		 for (Feedback feedback : listFeedback) {
 			 
-			 if (feedback.getGameName().equals(attributes[1])) {
+			 if (feedback.getGameName().equals(game.getName())) {
 			 // Build Table
 			 feedbackTable += "<tr>"
 			 		+ "<td>"
-			 		+ feedback.getReview() + "<hr>"
+			 		+ "<b>(" + feedback.getRating() + "/10.0) </b>" + feedback.getReview() + "<hr>"
 			 		+ "</td>"
 			 		+ "</tr>";
 			 
@@ -158,20 +174,20 @@ public class ViewGame extends HttpServlet {
 				"    </div>\r\n" + 
 				"    <br>\r\n" + 
 				"    <center>\r\n" + 
-				"      <span>" + attributes[1] + "</span>\r\n" + 
+				"      <span>" + game.getName() + "</span>\r\n" + 
 				"    </center>\r\n" + 
 				"    <br>\r\n" + 
 				"    <section>\r\n" + 
 				"      <h3>Rating: " + avgRating + "/10.0</h3>\r\n" + 
-				"      <p>Type: " + attributes[3] + "</p>\r\n" + 
-				"      <p>Players: " + attributes[4] + "-" + attributes[5] + "</p>\r\n" + 
-				"      <p>Instruction: </p>"+ attributes[2] +"<br>\r\n" + 
+				"      <p>Type: " + game.getType() + "</p>\r\n" + 
+				"      <p>Players: " + game.getMinPlayers() + "-" + game.getMaxPlayers() + "</p>\r\n" + 
+				"      <p>Instruction: </p>"+ game.getDescription() +"<br>\r\n" + 
 				"      <br>\r\n" + 
 				"      <br>\r\n" + 
 				"    </section>\r\n" + 
 				"    <center>\r\n" + 
 				"    <form action=\"ReviewGame\" method=\"POST\">\r\n" + 
-				"      <input class=\"subbutton\" type=\"submit\" name=\"" + paramNames + "\"value=\"Leave a Review\">\r\n" + 
+				"      <button class=\"subbutton\" type=\"submit\" name=\"name\" value=\"" + game.getName() + "\">Leave a Review</button>\r\n" + 
 				"    </form>\r\n" + 
 				"    </center>"+ 
 				"	<section>" +

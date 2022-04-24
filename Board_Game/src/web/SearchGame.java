@@ -2,39 +2,42 @@ package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import datamodel.Game;
 import util.UtilDB;
 
-@WebServlet("/ProcessReview")
-public class ProcessReview extends HttpServlet {
+@WebServlet("/SearchGame")
+public class SearchGame extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public ProcessReview() {
+    public SearchGame() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String rating = request.getParameter("rating").trim();
-		String review = request.getParameter("review").trim();
 		String gameName = request.getParameter("name").trim();
 		gameName = UtilDB.formatInfo(gameName);
-		
 	    PrintWriter out = response.getWriter();
 	    
-	    UtilDB.createFeedback(gameName, rating, review);
+	    if (UtilDB.doesGameExist(gameName))	{
+	    	System.out.println(gameName + " DOES EXIST.");
+	    	response.sendRedirect("/Board_Game/ViewGame?name=" + URLEncoder.encode(gameName, "UTF-8"));
+	    }
+	    	
+	    
 		retrieveDisplayData(out, gameName);
 	}
 	
 	void retrieveDisplayData(PrintWriter out, String gameName) {
-		out.print("<html>\r\n" + 
-				"<head>\r\n" + 
+		out.print("<html><head>\r\n" + 
 				"<style>\r\n" + 
 				"header {\r\n" + 
 				"    background-color:#6495ED;\r\n" + 
@@ -114,23 +117,23 @@ public class ProcessReview extends HttpServlet {
 				"    <center>\r\n" + 
 				"        <div><a href=\"/Board_Game/Homepage\"><button class=\"button\">Home</button></a></div>\r\n" + 
 				"        <div>\r\n" + 
-				"            <form action=\"ViewGame\" method=\"POST\">\r\n" + 
-				"            <button class=\"button\" type=\"submit\" value=\"" + gameName + "\" name=\"name\">Return to " + gameName + "</button>\r\n" + 
+				"            <form action=\"InsertGame.html\" method=\"POST\">\r\n" + 
+				"            <input class=\"button\" type=\"submit\" value=\"Add a New Game\">\r\n" + 
 				"            </form>\r\n" + 
 				"        </div>\r\n" + 
 				"    </center>\r\n" + 
 				"</div>\r\n" + 
 				"<section>\r\n" + 
-				"<center><h2>Your review has been submitted!</h2></center>\r\n" + 
+				"<center><h2>Could not find \"" + gameName + "\"</h2></center>\r\n" + 
 				"<br>\r\n" + 
 				"</section>\r\n" + 
 				"<footer>\r\n" + 
 				"Copyright - BoardGame - 2022\r\n" + 
 				"</footer>\r\n" + 
-				"</body>\r\n" + 
-				"</html>");
+				"\r\n" + 
+				"</body></html>");
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
