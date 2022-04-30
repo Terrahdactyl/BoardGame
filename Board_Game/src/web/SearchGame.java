@@ -28,7 +28,6 @@ public class SearchGame extends HttpServlet {
 	    PrintWriter out = response.getWriter();
 	    
 	    if (UtilDB.doesGameExist(gameName))	{
-	    	System.out.println(gameName + " DOES EXIST.");
 	    	response.sendRedirect("/Board_Game/ViewGame?name=" + URLEncoder.encode(gameName, "UTF-8"));
 	    }
 	    	

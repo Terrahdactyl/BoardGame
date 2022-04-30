@@ -2,6 +2,8 @@ package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,7 +34,7 @@ public class ViewGame extends HttpServlet {
 	
 	}
 
-	void retrieveDisplayData(PrintWriter out, String gameName, HttpServletResponse response) {
+	void retrieveDisplayData(PrintWriter out, String gameName, HttpServletResponse response) throws IOException {
 		
 		 List<Feedback> listFeedback = UtilDB.listFeedback();
 		 Game game = new Game();
@@ -46,7 +48,7 @@ public class ViewGame extends HttpServlet {
 			 try {
 				response.sendRedirect("/Board_Game/Homepage");
 			} catch (IOException e1) {
-				System.out.println("Couldn't find game");
+				System.out.println("Couldn't find game.");
 				e1.printStackTrace();
 			}
 		 }
@@ -87,8 +89,7 @@ public class ViewGame extends HttpServlet {
 				"        text-align: center;\r\n" + 
 				"        padding: 5px;\r\n" + 
 				"        font-size: 25px;\r\n" + 
-				"      }\r\n" + 
-				"\r\n" + 
+				"      }" +  
 				"      .button {\r\n" + 
 				"        background-color: #483D8B;\r\n" + 
 				"        border-radius: 20px;\r\n" + 
@@ -160,7 +161,7 @@ public class ViewGame extends HttpServlet {
 				"  </head>\r\n" + 
 				"  <body>\r\n" + 
 				"    <header>\r\n" + 
-				"      <h1>The Board Game</h1>\r\n" + 
+				"      <h1>The Game Board</h1>\r\n" + 
 				"    </header>\r\n" + 
 				"    <div id=\"container\">\r\n" + 
 				"      <center>\r\n" + 
@@ -175,8 +176,11 @@ public class ViewGame extends HttpServlet {
 				"    <br>\r\n" + 
 				"    <center>\r\n" + 
 				"      <span>" + game.getName() + "</span>\r\n" + 
+				"    </center>" +
+				"    <br> " +
+				"    <center>" +
+			    "      <img src=\"DisplayImage?name=" + URLEncoder.encode(game.getName(), "UTF-8") + "&bckgrd=no\" alt=\"Game Image\" width=\"400\" height=\"400\">" +
 				"    </center>\r\n" + 
-				"    <br>\r\n" + 
 				"    <section>\r\n" + 
 				"      <h3>Rating: " + avgRating + "/10.0</h3>\r\n" + 
 				"      <p>Type: " + game.getType() + "</p>\r\n" + 

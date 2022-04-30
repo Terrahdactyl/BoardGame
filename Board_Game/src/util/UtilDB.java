@@ -112,7 +112,7 @@ public class UtilDB {
       return resultList;
    }
 
-   public static void createGames(String name, String description, String type, String minplayers, String maxplayers) {
+   public static boolean createGames(String name, String description, String type, String minplayers, String maxplayers) {
 	   
 
 	   // Format input
@@ -123,14 +123,14 @@ public class UtilDB {
 	   // Check for any missing info
 	   if (hasMissingGameInfo(name, description, type, minplayers, maxplayers)) {
 		   System.out.println(name + " HAD MISSING INPUT OR INPUT HAD |");
-		   return; 
+		   return false; 
 	   }
 		  
 	   // Check if game already exists
 	   if (doesGameExist(name)) 
 	   {
 		   System.out.println(name + " ALREADY EXISTS");
-		   return;  
+		   return false;  
 	   }
 	   
 
@@ -147,6 +147,7 @@ public class UtilDB {
 	      } finally {
 	         session.close();
 	      }
+	      return true;
 	   }
    
    public static List<Game> listGames(String keyword) {
@@ -187,9 +188,15 @@ public class UtilDB {
    public static String formatInfo(String field) {
 	   
 	   field = field.replace("\"", "&quot;");
-	   field = field.replace("|", "");
+	   field = field.replace("|", "&#124;");
 	   field = field.replace("<", "&lt;");
 	   field = field.replace(">", "&gt;");
+	   field = field.replace("/", "&#47;");
+	   field = field.replace("\\", "&#92;");
+	   field = field.replace(":", "&#58;");
+	   field = field.replace("*", "&#42;");
+	   field = field.replace("?", "&#63;");
+	   
 	   
 	   return field;
    }

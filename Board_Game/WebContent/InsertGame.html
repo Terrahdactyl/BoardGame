@@ -91,7 +91,7 @@ span {
 	</center>
 	<br>
 	<section>
-		<form action="InsertGame" method="POST">
+		<form action="InsertGame" method="POST" enctype="multipart/form-data">
 			Name: <input type="text" name="name"> <br> Description:
 			<textarea rows="3" cols="40" name="description"></textarea>
 			<br> Type: <input list="types" name="type">
@@ -104,6 +104,7 @@ span {
 				<option value="Mystery">
 				<option value="Other">
 			</datalist>
+			<br> Image: <input type="file" name="file">
 			<br> Minimum Players: <input type="number" name="minplayers"
 				min="0" max="99"> <br> Maximum Players: <input
 				type="number" name="maxplayers" min="0" max="99"> <br>
