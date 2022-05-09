@@ -68,7 +68,7 @@ public class UtilDB {
 	   review = formatInfo(review);
 	   
 	   // Check for any missing info
-	   if (hasMissingFeedbackInfo(gameName, review)) {
+	   if (hasMissingFeedbackInfo(gameName, rating, review)) {
 		   System.out.println(gameName + " REVIEW HAD MISSING INPUT");
 		   return; 
 	   }
@@ -107,7 +107,10 @@ public class UtilDB {
             tx.rollback();
          e.printStackTrace();
       } finally {
-         session.close();
+         if (session!=null)
+         {
+        	 session.close();
+        }
       }
       return resultList;
    }
@@ -172,7 +175,10 @@ public class UtilDB {
             tx.rollback();
          e.printStackTrace();
       } finally {
-         session.close();
+    	  if (session!=null)
+          {
+         	 session.close();
+         }
       }
       return resultList;
    }
@@ -205,9 +211,9 @@ public class UtilDB {
 	   return !listGames(name).isEmpty();
    }
    
-   private static boolean hasMissingFeedbackInfo(String gameName, String review) {
+   private static boolean hasMissingFeedbackInfo(String gameName, String rating, String review) {
 	   
-	   if (gameName.isEmpty() || review.isEmpty())
+	   if (gameName.isEmpty() || rating.isEmpty() || review.isEmpty())
 		   return true;
 	   
 	   return false;
